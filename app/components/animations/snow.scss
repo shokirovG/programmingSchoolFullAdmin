@@ -1,0 +1,55 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+// h1 {
+//   font-size: 100px;
+// }
+.children {
+  min-height: 100%;
+}
+.animation {
+  width: 100%;
+  min-height: 100vh;
+  position: fixed;
+  z-index: 5565555555;
+}
+.Snow {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+.Snowflake {
+  dispalay: inline-block;
+  width: 0.1%;
+  color: white;
+  opacity: 0;
+  font-size: 120px;
+  margin: 0;
+  padding: 0;
+  animation: fall 16s linear infinite;
+}
+
+@keyframes fall {
+  0% {
+    opacity: 0;
+  }
+  3% {
+    opacity: 0.9;
+  }
+
+  90% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(0, 97%);
+    opacity: 0;
+  }
+}
