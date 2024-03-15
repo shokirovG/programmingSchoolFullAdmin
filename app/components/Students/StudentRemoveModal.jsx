@@ -18,16 +18,22 @@ const StudentRemoveModal = ({ name, group, id }) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const removeStudent = () => {
-    const newStudents = store.students.filter((elem) => elem.id !== id);
-    request(
-      `${process.env.NEXT_PUBLIC_URL}/students`,
-      "PUT",
-      JSON.stringify({ month: store.currentMonth, students: newStudents })
-    ).then(() => {
-      setShow(false);
-      toast.error(`${name} bazadan ochirildi`);
-      dispatch(fetchedStudents(newStudents));
-    });
+    if (price == 0) {
+      const newStudents = store.students.filter((elem) => elem.id !== id);
+      request(
+        `${process.env.NEXT_PUBLIC_URL}/students`,
+        "PUT",
+        JSON.stringify({ month: store.currentMonth, students: newStudents })
+      ).then(() => {
+        setShow(false);
+        toast.error(`${name} bazadan ochirildi`);
+        dispatch(fetchedStudents(newStudents));
+      });
+    } else {
+      toast.error(
+        "ushbu o`quvchini o`chirib bo`lmaydi, sababi u to`lov qilgan."
+      );
+    }
   };
   return (
     <div>
