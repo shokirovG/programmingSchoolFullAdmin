@@ -1,0 +1,11 @@
+1.tahrirlash chala kirim/chiqim+++++
+2.majburiy chiqim bo'limi
+3.hamma ma'lumotlarni chiqarish
+4.o'qituvchilar oyligini ko'rsatish
+5.guruhlar filter select 
+6.number animatsiya
+7.react transition todoga
+8.o`quvchini tanlashda kirimda qarzini hisoblashda ozroq bag bor+++++
+9.failed to fetch bagini tuzatish
+10.console dagi bag larni yuq qilish, shu uchun todolarni edit qilishda ikkita bir hil user bo`lsa almashib ketayabdi.
+11.kirim/chiqimlarni edit qilishda hisob kitablar ishlamaydi + 0 raqamini click degan joyga qo`shayabdi
