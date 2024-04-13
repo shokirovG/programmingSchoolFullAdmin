@@ -3,9 +3,12 @@ import React, { useState } from "react";
 import ChiqimItemModal from "./ChiqimItemModal";
 const ChiqimItem = (props) => {
   const [show, setShow] = useState(false);
-  const { costType, costValue, infoValue, tolovType, userAvans } = props;
+  const { costType, costValue, infoValue, tolovType, userAvans, id } = props;
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = () => {
+    localStorage.setItem("currentDay", props.kun);
+    setShow(true);
+  };
 
   return (
     <>
@@ -17,7 +20,7 @@ const ChiqimItem = (props) => {
         <td>{infoValue}</td>
         <td>{tolovType}</td>
       </tr>
-      {/* <ChiqimItemModal show={show} handleClose={handleClose} {...props} /> */}
+      <ChiqimItemModal show={show} handleClose={handleClose} {...props} />
     </>
   );
 };

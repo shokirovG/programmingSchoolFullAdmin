@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import Image from "next/image";
 import React from "react";
 
-const RemoveItem = ({kun}) => {
+const RemoveItem = ({ kun }) => {
   const store = useSelector((state) => state);
   const dispatch = useDispatch();
   const { request } = useFetch();

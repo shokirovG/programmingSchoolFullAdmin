@@ -28,9 +28,8 @@ const HarajatItemModal = ({ show, handleClose, handleShow }) => {
   const store = useSelector((state) => state);
   const dispatch = useDispatch();
   const { request } = useFetch();
+  console.log("workers", store.workers);
   const addCost = () => {
-    console.log("cost");
-
     if (costType !== "" && costValue && infoValue !== "") {
       console.log("cost-2");
       dispatch(spinnerLoading());
@@ -40,7 +39,7 @@ const HarajatItemModal = ({ show, handleClose, handleShow }) => {
         costValue,
         infoValue,
         tolovType,
-        userAvans,
+        userAvans: userAvans === "Kimga" ? "" : userAvans,
       };
       const naqdTolov = tolovType == "Naqd" ? Number(costValue) : 0;
       const clickTolov = tolovType == "Click" ? Number(costValue) : 0;
@@ -135,7 +134,7 @@ const HarajatItemModal = ({ show, handleClose, handleShow }) => {
             <option value="Markaz">Markaz</option>
             <option value="Avans">Avans</option>
             <option value="Kredit">Kredit</option>
-            <option value="Oylik">Oylik</option>
+
             <option value="Arenda">Arenda</option>
             <option value="Qarz">Qarz</option>
           </select>
@@ -150,13 +149,9 @@ const HarajatItemModal = ({ show, handleClose, handleShow }) => {
               <option value="Kimga" selected disabled>
                 Kimga
               </option>
-              <option value="G`iyos">G`iyos</option>
-              <option value="Farrux">Farrux</option>
-              <option value="Sarvar">Sarvar</option>
-              <option value="Obid">Obid</option>
-              <option value="Rahim">Rahim</option>
-              <option value="Mehribonu">Mehribonu</option>
-              <option value="Zaxro">Zaxro</option>
+              {store.workers.map((elem) => (
+                <option value={elem.name}>{elem.name}</option>
+              ))}
             </select>
           ) : null}
           <select

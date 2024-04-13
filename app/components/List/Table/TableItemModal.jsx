@@ -1,11 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { toast } from "react-toastify";
-import { fetchedStudents, hisobotFetched, loaded } from "@/app/redux/actions";
+import {
+  fetchedStudents,
+  hisobotFetched,
+  loaded,
+  spinnerLoaded,
+  spinnerLoading,
+} from "@/app/redux/actions";
 import { useDispatch } from "@/node_modules/react-redux/dist/react-redux";
 import useFetch from "@/app/hooks/useFetch";
+import calcClickKirim from "@/app/hooks/calcClickKirim";
+import calcNaqdChiqim from "@/app/hooks/calcNaqdChiqim";
+import calcNaqdKirim from "@/app/hooks/calcNaqdKirim";
+import calcClickChiqim from "@/app/hooks/calcClickChiqim";
+import Spinner from "../../Students/Spinner";
 const TableItemModal = ({
   show,
   handleClose,
@@ -29,37 +40,58 @@ const TableItemModal = ({
   const store = useSelector((state) => state);
   const { request } = useFetch();
   const dispatch = useDispatch();
-  const changeItem = () => {
-    handleClose();
-    console.log(department);
+  console.log("priceStudent", priceStudent);
+  const changeItem = (e) => {
+    e.preventDefault();
+    dispatch(spinnerLoading());
+    const findStudentTotalPrice = store.students.filter(
+      (el) => el.name === student
+    );
+
     const newKirim = {
       id,
       department: departmentValue,
       group: groupValue,
       student: studentValue,
 
-      priceStudent: priceStudent - price + Number(tolovValue),
+      priceStudent: findStudentTotalPrice[0].price - price + Number(tolovValue),
       price: tolovValue,
       priceType: tolovTypeValue,
       priceMonth: oyValue,
       foiz,
     };
+    console.log("newKirim", newKirim);
+    const naqdTolov = tolovTypeValue == "Naqd" ? Number(tolovValue) : 0;
+    const clickTolov = tolovTypeValue == "Click" ? Number(tolovValue) : 0;
+
     const newHisoblar = store.hisobot[0].hisoblar.map((elem) => {
       if (elem.kun == localStorage.getItem("currentDay")) {
+        const removeKirim = elem.hisobot.kirim.filter((el) => el.id !== id);
+        console.log("removeKirim", removeKirim);
         return {
           ...elem,
           hisobot: {
             ...elem.hisobot,
-            kirim: [
-              ...elem.hisobot.kirim.filter((el) => el.id !== id),
-              newKirim,
-            ],
+            kirim: [...removeKirim, newKirim],
           },
+          balansNaqd: Number(
+            calcNaqdKirim(
+              [...elem.hisobot.kirim.filter((el) => el.id !== id), newKirim],
+              "Naqd"
+            ) - calcNaqdChiqim(elem.hisobot.chiqim, "Naqd")
+          ),
+          balansClick: Number(
+            calcClickKirim(
+              [...elem.hisobot.kirim.filter((el) => el.id !== id), newKirim],
+              "Click"
+            ) - calcClickChiqim(elem.hisobot.chiqim, "Click")
+          ),
         };
       } else {
         return elem;
       }
     });
+    console.log("newHisoblar", newHisoblar);
     request(
       `${process.env.NEXT_PUBLIC_URL}/hisobot`,
       "POST",
@@ -79,25 +111,26 @@ const TableItemModal = ({
       request(`${process.env.NEXT_PUBLIC_URL}/students`).then((res) => {
         res.students.forEach((elem) => {
           if (elem.month == localStorage.getItem("currentMonth")) {
-            console.log("dispatch ishladi", elem.students);
             dispatch(fetchedStudents(elem.students));
           }
         });
         dispatch(loaded());
       });
-      toast.success("bazaga qo`shildi!");
+      dispatch(spinnerLoaded());
+      toast.success("baza o`zgardi!");
     });
 
     const newStudents = store.students.map((el) => {
-      if (el.name === studentValue) {
+      if (el.name == student) {
         return {
           ...el,
-          price: Number(el.price) - price + Number(tolovValue),
+          price: findStudentTotalPrice[0].price - price + Number(tolovValue),
         };
       } else {
         return el;
       }
     });
+
     request(
       `${process.env.NEXT_PUBLIC_URL}/students`,
       "PUT",
@@ -107,8 +140,10 @@ const TableItemModal = ({
       })
     ).then(() => {
       toast.info("student to`lov o`zgardi!");
+      handleClose();
     });
   };
+
   return (
     <>
       <Modal show={show} onHide={handleClose}>
@@ -117,7 +152,7 @@ const TableItemModal = ({
         </Modal.Header>
         <Modal.Body>
           {" "}
-          <form action="">
+          <form onSubmit={changeItem}>
             <div className="mb-3 flex flex-col gap-[10px]">
               <select
                 className="form-select"
@@ -144,17 +179,9 @@ const TableItemModal = ({
                 <option selected disabled>
                   Guruh
                 </option>
-                <option value="Front-5">Front-5</option>
-                <option value="Front-8">Front-8</option>
-                <option value="Front-10">Front-10</option>
-                <option value="Front-12">Front-12</option>
-                <option value="Front-13">Front-13</option>
-                <option value="K.S-1">K.S-1</option>
-                <option value="K.S-2">K.S-2</option>
-                <option value="Tibbiyot-1">Tibbiyot-1</option>
-                <option value="Ingliz-tili-1">Ingliz-tili-1</option>
-                <option value="Ingliz-tili-2">Ingliz-tili-2</option>
-                <option value="Scretch-1">Scretch-1</option>
+                {store.groups.map((elem) => (
+                  <option value={elem.groupValue}>{elem.groupValue}</option>
+                ))}
               </select>
 
               <select
@@ -219,9 +246,13 @@ const TableItemModal = ({
           </form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="success" onClick={changeItem}>
-            Saqlash
-          </Button>
+          {store.spinnerLoader === "loading" ? (
+            <Spinner />
+          ) : (
+            <Button variant="success" onClick={changeItem}>
+              Saqlash
+            </Button>
+          )}
         </Modal.Footer>
       </Modal>
     </>

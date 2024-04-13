@@ -93,7 +93,9 @@ body {
 }
 /* custom scrollbar */
 body::-webkit-scrollbar {
+  position: fixed;
   width: 16px;
+  z-index: 999999999;
 }
 
 body::-webkit-scrollbar-track {
@@ -155,6 +157,7 @@ body::-webkit-scrollbar-thumb:hover {
   width: 30px !important;
 }
 .workers__item {
+  overflow: hidden;
   transition: all 0.2s ease-in-out;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
     rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
@@ -167,4 +170,11 @@ body::-webkit-scrollbar-thumb:hover {
 }
 .oylik__span {
   width: 300px !important;
+}
+.monthClone {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  font-family: DM Sans;
+}
+.workers__page {
+  width: calc(100vw - 230px - 16px);
 }

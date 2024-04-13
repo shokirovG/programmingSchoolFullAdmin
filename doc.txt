@@ -9,3 +9,17 @@
 9.failed to fetch bagini tuzatish
 10.console dagi bag larni yuq qilish, shu uchun todolarni edit qilishda ikkita bir hil user bo`lsa almashib ketayabdi.
 11.kirim/chiqimlarni edit qilishda hisob kitablar ishlamaydi + 0 raqamini click degan joyga qo`shayabdi
+
+
+BAGLAR:
+1.
+2.hisobotlarda edit funksiyasini q`oshish
+3.
+4.2-marta kirimmi chiqimmi nimadir qo`shgan qiymat 0 ni o`chirib qoyish kera
+5.o`quvchilar ikkingi fanga kelgan qo`shimcha qo`shishsiz ikkinchi guruhga q`oshish (id validate)
+6.mart oyi boshidan avans berish dagi selectDAGILARNI baza bo`yicha chiqadigan qilish kerak , agar hozir qilsam ismi o`zgarib avans ni hisoblamaydi
+7.to`lovlarni ham o`quvchilarni guruhini ham hammasini id bo`yicha bazaga qo`shadigan qilish kerak
+
+BAG-1 
+chiqimni aynan avansni o`zgartirsa boshqa joyga ham chiqib qolayabdi.
+kirimni ham test qilib korish kerak

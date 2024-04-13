@@ -33,7 +33,7 @@ function Table(props) {
         </thead>
         <tbody>
           {props.hisobot.kirim.map((el, index) => {
-            return <TableItem key={el.id} {...el} />;
+            return <TableItem key={el.id} {...el} kun={props.kun} />;
           })}
         </tbody>
       </table>
@@ -51,7 +51,7 @@ function Table(props) {
         </thead>
         <tbody>
           {props.hisobot.chiqim.map((el, index) => (
-            <ChiqimItem {...el} key={index} />
+            <ChiqimItem {...el} key={el.id} kun={props.kun} />
           ))}
         </tbody>
       </table>

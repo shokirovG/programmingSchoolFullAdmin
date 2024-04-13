@@ -16,14 +16,26 @@ import "react-toastify/dist/ReactToastify.css";
 import { useEffect, useRef, useState } from "react";
 import { fetchedStudents, fetchingStudents, loaded } from "./redux/actions";
 import useFetch from "./hooks/useFetch";
-import SignIn from "./components/Sign/SignIn";
+
 import Login from "./components/Sign/Login";
 import Snow from "@/app/components/animations/Snow";
+import { useRouter } from "@/node_modules/next/router";
+import { Sign } from "crypto";
+import SignIn from "./components/Sign/SignIn";
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const { request } = useFetch();
+
+  useEffect(() => {
+    // request(`${process.env.NEXT_PUBLIC_URL}/auth`).then((res: any) => {
+    //   if (!res.isAuth) {
+    //   }
+    // });
+  });
+
   return (
     <Provider store={store}>
       <html lang="en">

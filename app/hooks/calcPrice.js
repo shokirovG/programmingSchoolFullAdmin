@@ -17,6 +17,7 @@ function calcPrice(price, foiz, department) {
       qarz = 240000 - foiz - price;
       break;
     }
+
     default:
       qarz;
   }

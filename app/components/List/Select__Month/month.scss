@@ -1,10 +1,10 @@
 .selectdiv {
   width: 100px;
-  position: absolute;
+  position: fixed;
   /*Don't really need this just for demo styling*/
 
   top: 10px;
-  right: 0 !important;
+  right: 16px !important;
   min-width: 130px;
 }
 

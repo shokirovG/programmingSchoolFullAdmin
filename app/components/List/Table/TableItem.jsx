@@ -17,8 +17,13 @@ const TableItem = (props) => {
   } = props;
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleClose = () => {
+    setShow(false);
+  };
+  const handleShow = () => {
+    localStorage.setItem("currentDay", props.kun);
+    setShow(true);
+  };
 
   return (
     <>
@@ -37,12 +42,12 @@ const TableItem = (props) => {
         <td>{priceMonth}</td>
         <td>{priceType}</td>
       </tr>
-      {/* <TableItemModal
+      <TableItemModal
         {...props}
         show={show}
         handleClose={handleClose}
         handleShow={handleShow}
-      /> */}
+      />
     </>
   );
 };

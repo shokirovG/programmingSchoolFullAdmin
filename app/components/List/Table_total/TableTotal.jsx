@@ -19,7 +19,7 @@ function TableTotal(props) {
   if (store.hisobot.length > 0) {
     chiqimlar = store.hisobot[0].hisoblar;
   }
-  console.log(store);
+
   return (
     <div className=" totalTable ">
       <table className="rwd-table">
@@ -28,7 +28,6 @@ function TableTotal(props) {
             <th>Yig`ildi</th>
             <th>Yig`ilishi kerak</th>
 
-            <th>Kutilayotgan foyda</th>
             <th>Balans</th>
           </tr>
         </thead>
@@ -40,28 +39,9 @@ function TableTotal(props) {
             </td>
             <td data-th="Movie Title">
               Dasturlash:{" "}
-              {numberTrim(calcQarzPrice(store.students, "Dasturlash"))}
+              {numberTrim(calcQarzPrice(store.students, "Dasturlash")+calcQarzPrice(store.students, "Dasturlash","Front-12"))}
             </td>
 
-            <td data-th="Genre">
-              {" "}
-              {numberTrim(
-                calcFoyda(
-                  chiqimlar,
-                  store.majburiyChiqimlar.length > 0
-                    ? store.majburiyChiqimlar[0]
-                    : { chiqimlar: [] },
-                  calcPriceTolov(store.students, "Dasturlash") +
-                    calcPriceTolov(store.students, "K.S") +
-                    calcPriceTolov(store.students, "Ingliz-tili") +
-                    calcPriceTolov(store.students, "Scretch") +
-                    calcQarzPrice(store.students, "Dasturlash") +
-                    calcQarzPrice(store.students, "K.S") +
-                    calcQarzPrice(store.students, "Ingliz-tili") +
-                    calcQarzPrice(store.students, "Scretch")
-                )
-              )}
-            </td>
             <td data-th="Year">Kassa: {0}</td>
           </tr>
           <tr>
@@ -72,7 +52,6 @@ function TableTotal(props) {
               K.Savodxonlik: {numberTrim(calcQarzPrice(store.students, "K.S"))}
             </td>
 
-            <td data-th="Genre"></td>
             <td data-th="Year">Karta: {0}</td>
           </tr>
           <tr>
@@ -85,7 +64,6 @@ function TableTotal(props) {
               {numberTrim(calcQarzPrice(store.students, "Ingliz-tili"))}
             </td>
 
-            <td data-th="Genre"></td>
             <td data-th="Year"></td>
           </tr>
           <tr>
@@ -97,18 +75,15 @@ function TableTotal(props) {
             </td>
 
             <td data-th="Year"></td>
-            <td data-th="Year"></td>
           </tr>
           <tr>
             <td data-th="Movie Title"></td>
-            <td></td>
 
             <td data-th="Year"></td>
             <td data-th="Year"></td>
           </tr>
           <tr>
             <td data-th="Movie Title"></td>
-            <td></td>
 
             <td data-th="Year"></td>
             <td data-th="Year"></td>
@@ -133,7 +108,6 @@ function TableTotal(props) {
               )}
             </td>
 
-            <td data-th="Gross">Jami: 0</td>
             <td data-th="Gross">Jami: 0</td>
           </tr>
         </tbody>
