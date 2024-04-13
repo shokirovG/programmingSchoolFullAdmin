@@ -72,6 +72,34 @@ const auth = (login, parol) => {
     payload: { login, parol },
   };
 };
+const monthPriceFetched = (db) => {
+  return {
+    type: "monthPriceFetched",
+    payload: db,
+  };
+};
+const fetchedWorkers = (workers) => {
+  return {
+    type: "fetchedWorkers",
+    payload: workers,
+  };
+};
+const spinnerDeleteLoading = () => {
+  return {
+    type: "spinnerDeleteLoading",
+  };
+};
+const spinnerDeleteLoaded = () => {
+  return {
+    type: "spinnerDeleteLoaded",
+  };
+};
+const fetchedGroups = (groups) => {
+  return {
+    type: "fetchedGroups",
+    payload: groups,
+  };
+};
 export {
   auth,
   signIn,
@@ -86,4 +114,9 @@ export {
   hisobotFetched,
   addTodo,
   fetchedMajburiy,
+  monthPriceFetched,
+  fetchedWorkers,
+  spinnerDeleteLoading,
+  spinnerDeleteLoaded,
+  fetchedGroups,
 };

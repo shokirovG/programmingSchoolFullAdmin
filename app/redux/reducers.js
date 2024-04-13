@@ -7,6 +7,10 @@ const initialState = {
   majburiyChiqimlar: [],
   login: "",
   parol: "",
+  monthPrice: {},
+  workers: [],
+  spinnerDeleteLoader: "none",
+  groups: [],
 };
 
 function reducers(state = initialState, action) {
@@ -112,6 +116,37 @@ function reducers(state = initialState, action) {
         ...state,
         login: action.payload.login,
         parol: action.payload.parol,
+      };
+    }
+    case "monthPriceFetched": {
+      console.log("month reducer");
+      return {
+        ...state,
+        monthPrice: action.payload,
+      };
+    }
+    case "fetchedWorkers": {
+      return {
+        ...state,
+        workers: action.payload,
+      };
+    }
+    case "spinnerDeleteLoaded": {
+      return {
+        ...state,
+        spinnerDeleteLoader: "loaded",
+      };
+    }
+    case "spinnerDeleteLoading": {
+      return {
+        ...state,
+        spinnerDeleteLoader: "loading",
+      };
+    }
+    case "fetchedGroups": {
+      return {
+        ...state,
+        groups: action.payload,
       };
     }
     default:
