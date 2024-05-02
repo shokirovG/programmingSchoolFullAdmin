@@ -37,10 +37,14 @@
   width: 140px !important;
 }
 .th_8 {
-  width: 200px !important;
+  width: 110px !important;
 }
 .th_9 {
-  width: 85px !important;
+  width: 110px !important;
+  padding: 0
+}
+.th_10 {
+  width: 50px !important;
 }
 /* title */
 .title-container {
@@ -77,7 +81,7 @@
 }
 .table__students th,
 td {
-  padding: 16px;
+  padding: 12px;
   text-align: center;
 }
 /* even and odd color */

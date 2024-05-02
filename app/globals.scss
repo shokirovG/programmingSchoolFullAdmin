@@ -46,7 +46,7 @@ body {
   margin-top: 10px;
 }
 .active__bg {
-  background-color: #4318ff;
+  background-color:#4318ff;
   color: white;
   .sidebar__svg {
     fill: #ffffff;
@@ -177,4 +177,21 @@ body::-webkit-scrollbar-thumb:hover {
 }
 .workers__page {
   width: calc(100vw - 230px - 16px);
+}
+.date__create {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  border: 1px solid #bbb;
+  padding: 5px;
+  border-radius: 5px;
+  input {
+    justify-self: flex-end;
+    margin: 0;
+    border: none;
+    width: 110px;
+    outline: none;
+  }
+  margin: 0 auto;
+  align-items: center;
 }

@@ -48,6 +48,7 @@ const page = ({ params }) => {
     date.getMonth() + 1
   )}-${Zero(date.getDate())}`;
   const [createdStudentDate, setCreatedStudentDate] = useState(initialDate);
+  const [priceStudentDate, setPriceStudentDate] = useState(initialDate);
   const initial = useRef(false);
   const [filterDepartment, setFilterDepartment] = useState("Barcha kafedralar");
   const [classStudent, setClassStudent] = useState(false);
@@ -72,6 +73,7 @@ const page = ({ params }) => {
           id: v4(),
           foiz,
           created: moment(createdStudentDate).format("L"),
+          priceDate: moment(priceStudentDate).format("L"),
         };
         console.log([...store.students, newStudent]);
         request(
@@ -148,7 +150,7 @@ const page = ({ params }) => {
       );
     }
   }, [store]);
-  
+
   return (
     <>
       {store.loading === "loading" ? (
@@ -192,7 +194,7 @@ const page = ({ params }) => {
                   //     store.students.filter((el) => el.group === elem),
                   //   ];
                   // });
-              
+                  console.log("newGroups", newGroups);
                   let newStudents2 = [];
 
                   for (let item of newGroups) {
@@ -218,6 +220,8 @@ const page = ({ params }) => {
 
                 <option value="Scretch">Scretch</option>
                 <option value="Ingliz-tili">Ingliz-tili</option>
+                <option value="Python">Python</option>
+                <option value="Grafik-Dizayn">Grafik-Dizayn</option>
               </select>
               <select
                 className="absolute left-[45%] top-[20px] bg-white p-[10px]"
@@ -271,8 +275,10 @@ const page = ({ params }) => {
                     <th className="th_5">Qilgan to'lov</th>
                     <th className="th_6">Qarz</th>
                     <th className="th_7">Chegirma</th>
-                    <th className="th_8">Guruhga qo'shilgan</th>
-                    <th className="th_9"></th>
+
+                    <th className="th_9">Kelgan</th>
+                    <th className="th_8">To`lov</th>
+                    <th className="th_10"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -345,6 +351,8 @@ const page = ({ params }) => {
                       <option value="K.S">K.S</option>
                       <option value="Scretch">Scretch</option>
                       <option value="Ingliz-tili">Ingliz-tili</option>
+                      <option value="Python">Python</option>
+                      <option value="Grafik-Dizayn">Grafik-Dizayn</option>
                       <option value="Markaz">Markaz</option>
                     </select>
                     <input
@@ -373,14 +381,28 @@ const page = ({ params }) => {
                         setFoiz(Number(e.target.value));
                       }}
                     />
-                    <input
-                      type="date"
-                      className="w-[150px] mx-[auto] p-[5px] bg-white text-black border-[1px] border-[black]"
-                      value={createdStudentDate}
-                      onChange={(e) => {
-                        setCreatedStudentDate(e.target.value);
-                      }}
-                    />
+                    <div className="date__create">
+                      <label>Guruhga qo`shilgan sanasi:</label>
+                      <input
+                        type="date"
+                        className="w-[150px] mx-[auto] p-[5px] bg-white text-black border-[1px] border-[black]"
+                        value={createdStudentDate}
+                        onChange={(e) => {
+                          setCreatedStudentDate(e.target.value);
+                        }}
+                      />
+                    </div>
+                    <div className="date__create">
+                      <label>To`lov sanasi:</label>
+                      <input
+                        type="date"
+                        className="w-[150px] mx-[auto] p-[5px] bg-white text-black border-[1px] border-[black]"
+                        value={priceStudentDate}
+                        onChange={(e) => {
+                          setPriceStudentDate(e.target.value);
+                        }}
+                      />
+                    </div>
                     {validText ? (
                       <p className="text-red-500 text-center">
                         Guruh va Kafedrani tanlang
